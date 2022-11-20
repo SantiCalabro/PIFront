@@ -15,7 +15,7 @@ export const CLEAR_FILTER = "CLEAR_FILTER";
 export const SET_LANGUAGE = "SET_LANGUAGE";
 
 export const showDogs = () => dispatch => {
-  return fetch("http://localhost:3001/dogs")
+  return fetch("/dogs")
     .then(res => res.json())
     .then(res => {
       dispatch({ type: SHOW_DOGS, payload: res });
@@ -23,7 +23,7 @@ export const showDogs = () => dispatch => {
     .catch(() => dispatch({ type: SET_ERROR }));
 };
 export const showDetail = id => dispatch => {
-  return fetch(`http://localhost:3001/dogs/${id}`)
+  return fetch(`/dogs/${id}`)
     .then(res => res.json())
     .then(res => {
       dispatch({ type: SHOW_DETAIL, payload: res });
@@ -31,7 +31,7 @@ export const showDetail = id => dispatch => {
     .catch(() => dispatch({ type: SET_ERROR }));
 };
 export const showTemperaments = () => dispatch => {
-  return fetch("http://localhost:3001/temperaments")
+  return fetch("/temperaments")
     .then(res => res.json())
     .then(res => {
       dispatch({ type: SHOW_TEMPS, payload: res });
@@ -40,7 +40,7 @@ export const showTemperaments = () => dispatch => {
 };
 
 export const showBreeds = () => dispatch => {
-  return fetch("http://localhost:3001/breeds")
+  return fetch("/breeds")
     .then(res => res.json())
     .then(res => {
       dispatch({ type: SHOW_BREEDS, payload: res });
@@ -49,7 +49,7 @@ export const showBreeds = () => dispatch => {
 };
 
 export const getCreated = () => dispatch => {
-  return fetch("http://localhost:3001/dogs/created")
+  return fetch("/dogs/created")
     .then(res => res.json())
     .then(res => {
       dispatch({ type: GET_CREATED, payload: res });
@@ -59,7 +59,7 @@ export const getCreated = () => dispatch => {
 
 export const postDog = payload => async dispatch => {
   try {
-    const res = await axios.post("http://localhost:3001/dogs", payload);
+    const res = await axios.post("/dogs", payload);
     return dispatch({ type: POST_DOG, payload: res.data });
   } catch (e) {
     console.log(e);
@@ -69,7 +69,7 @@ export const postDog = payload => async dispatch => {
 
 export const dogUpdate = (id, payload) => async dispatch => {
   try {
-    const res = await axios.put(`http://localhost:3001/dogs?id=${id}`, payload);
+    const res = await axios.put(`/dogs?id=${id}`, payload);
     return dispatch({ type: DOG_UPDATE, payload: res.data });
   } catch {
     return dispatch({ type: SET_ERROR });
@@ -78,7 +78,7 @@ export const dogUpdate = (id, payload) => async dispatch => {
 
 export const dogDelete = id => async dispatch => {
   try {
-    const res = await axios.delete(`http://localhost:3001/dogs?id=${id}`);
+    const res = await axios.delete(`/dogs?id=${id}`);
     return dispatch({ type: DOG_DELETE });
   } catch (e) {
     console.log(e);
